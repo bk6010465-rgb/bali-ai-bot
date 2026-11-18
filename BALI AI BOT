@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BALI AI BOT</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #07111f;
+  color: white;
+}
+header {
+  background: #101e32;
+  padding: 22px;
+  text-align: center;
+  border-bottom: 2px solid #00bfff;
+}
+header h1 {
+  color: #00c8ff;
+  margin: 0;
+}
+header p {
+  color: #a9c5df;
+}
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+.card {
+  background: #12243a;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 18px;
+  border: 1px solid #25415f;
+}
+h2 {
+  color: #00c8ff;
+  font-size: 19px;
+}
+label {
+  display: block;
+  margin: 15px 0 7px;
+}
+select, button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 9px;
+  border: none;
+  font-size: 16px;
+}
+select {
+  background: #203750;
+  color: white;
+}
+button {
+  background: #00a9e8;
+  color: white;
+  font-weight: bold;
+  margin-top: 15px;
+  cursor: pointer;
+}
+button:active {
+  opacity: .8;
+}
+.signal {
+  text-align: center;
+  padding: 20px;
+  background: #091a2c;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+.signal h3 {
+  color: #00d5ff;
+}
+.status {
+  color: #ffca55;
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #829bb3;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🚀 BALI AI BOT</h1>
+  <p>Smart Trading Signal Dashboard</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>📊 Trading Settings</h2>
+
+<label>Select Platform</label>
+<select id="platform">
+<option>Quotex</option>
+<option>Pocket Option</option>
+</select>
+
+<label>Select Market</label>
+<select id="market">
+<option>OTC Market</option>
+<option>Normal Market</option>
+</select>
+
+<label>Select Currency Pair</label>
+<select id="pair">
+<option>EUR/USD</option>
+<option>GBP/USD</option>
+<option>USD/JPY</option>
+<option>AUD/USD</option>
+<option>EUR/GBP</option>
+<option>USD/CAD</option>
+</select>
+
+<label>Select Timeframe</label>
+<select id="time">
+<option>1 Minute</option>
+<option>5 Minutes</option>
+<option>15 Minutes</option>
+</select>
+
+<button onclick="getSignal()">
+GET SIGNAL
+</button>
+</div>
+
+<div class="card">
+<h2>🤖 AI Signal Result</h2>
+<div class="signal" id="result">
+<h3>BALI AI BOT</h3>
+<p>Select your trading settings.</p>
+<p class="status">Waiting for analysis...</p>
+</div>
+</div>
+
+<div class="card">
+<h2>📈 Signal Information</h2>
+<p>Platform: <span id="p">Not selected</span></p>
+<p>Market: <span id="m">Not selected</span></p>
+<p>Pair: <span id="c">Not selected</span></p>
+<p>Timeframe: <span id="t">Not selected</span></p>
+</div>
+
+<div class="card">
+<h2>⚠️ Risk Warning</h2>
+<p>Trading involves financial risk. No signal guarantees profit. Always verify market conditions before trading.</p>
+</div>
+
+</div>
+
+<footer>
+© 2026 BALI AI BOT | Trading Signals
+</footer>
+
+<script>
+function getSignal() {
+  const platform = document.getElementById("platform").value;
+  const market = document.getElementById("market").value;
+  const pair = document.getElementById("pair").value;
+  const time = document.getElementById("time").value;
+
+  document.getElementById("p").innerText = platform;
+  document.getElementById("m").innerText = market;
+  document.getElementById("c").innerText = pair;
+  document.getElementById("t").innerText = time;
+
+  document.getElementById("result").innerHTML = `
+    <h3>🔍 Analysis Required</h3>
+    <p>${platform}</p>
+    <p>${market}</p>
+    <p>${pair}</p>
+    <p>${time}</p>
+    <p class="status">
+    Live market data is not connected yet.
+    </p>
+    <p>Demo only — no BUY/SELL recommendation.</p>
+  `;
+}
+</script>
+
+</body>
+</html>
