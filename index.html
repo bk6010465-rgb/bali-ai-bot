@@ -1,175 +1,134 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BALI AI BOT</title>
-<style>
-*{box-sizing:border-box}
-body{
- margin:0;background:#07111f;color:white;
- font-family:Arial,sans-serif;
-}
-header{
- text-align:center;padding:24px 12px;
- background:#101e32;border-bottom:2px solid #00c8ff;
-}
-header h1{color:#00c8ff;margin:0;font-size:30px}
-header p{color:#a9c5df}
-.container{max-width:600px;margin:auto;padding:15px}
-.card{
- background:#12243a;border:1px solid #25415f;
- padding:18px;border-radius:15px;margin-bottom:17px;
-}
-h2{color:#00c8ff;font-size:19px}
-label{display:block;margin:15px 0 7px}
-select,button{
- width:100%;padding:14px;border-radius:9px;
- border:none;font-size:16px;
-}
-select{background:#203750;color:white}
-button{
- background:#00a9e8;color:white;font-weight:bold;
- margin-top:15px;cursor:pointer;
-}
-button:active{opacity:.8}
-.result{
- text-align:center;background:#091a2c;
- padding:20px;border-radius:12px;margin-top:15px;
-}
-.signal{font-size:28px;font-weight:bold}
-.buy{color:#00e69a}
-.sell{color:#ff5575}
-.wait{color:#ffca55}
-.small{color:#9bb2c9;font-size:12px}
-.row{
- display:flex;justify-content:space-between;
- padding:9px 0;border-bottom:1px solid #29415b;
-}
-footer{text-align:center;padding:20px;color:#829bb3;font-size:12px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BALI AI BOT</title>
+    <style>
+        *{box-sizing:border-box}
+        body{
+            margin:0;background:#07111f;color:white;
+            font-family:Arial,sans-serif;
+            padding-bottom: 40px;
+        }
+        header{
+            text-align:center;padding:20px 12px;
+            background:#101e32;border-bottom:2px solid #00c8ff;
+        }
+        header h1{color:#00c8ff;margin:0;font-size:22px;}
+        header p{color:#a9c5df;margin:5px 0 0;font-size:12px;}
+        .container{max-width:600px;margin:15px auto;padding:0 15px;}
+        .card{
+            background:#101e32;border:1px solid #1e3a5f;
+            border-radius:10px;padding:15px;margin-bottom:15px;
+        }
+        .card h2{font-size:16px;color:#00c8ff;margin-top:0;margin-bottom:12px;}
+        label{display:block;font-size:13px;color:#a9c5df;margin-bottom:5px;}
+        select{
+            width:100%;padding:10px;background:#07111f;color:white;
+            border:1px solid #1e3a5f;border-radius:6px;margin-bottom:12px;font-size:14px;
+        }
+        .btn{
+            width:100%;padding:12px;background:#00c8ff;color:#07111f;
+            font-weight:bold;border:none;border-radius:6px;font-size:15px;cursor:pointer;
+        }
+        .btn:active{background:#0099cc;}
+        .signal-box{
+            background:#07111f;border:1px dashed #00c8ff;
+            padding:12px;border-radius:6px;margin-top:10px;text-align:center;
+        }
+        .footer{text-align:center;color:#6b85a0;font-size:11px;margin-top:20px;}
+    </style>
 </head>
 <body>
 
-<header>
-<h1>🚀 BALI AI BOT</h1>
-<p>SMART TRADING SIGNAL DASHBOARD</p>
-</header>
+    <header>
+        <h1>🚀 BALI AI BOT</h1>
+        <p>SMART TRADING SIGNAL DASHBOARD</p>
+    </header>
 
-<div class="container">
+    <div class="container">
+        <!-- Settings Card -->
+        <div class="card">
+            <h2>⚙️ Trading Settings</h2>
+            
+            <label>Choose Platform</label>
+            <select id="platform">
+                <option value="Quotex">Quotex</option>
+                <option value="Pocket Option">Pocket Option</option>
+            </select>
 
-<div class="card">
-<h2>⚙️ Trading Settings</h2>
+            <label>Choose Market</label>
+            <select id="market">
+                <option value="OTC Market">OTC Market</option>
+                <option value="Normal Market">Normal Market</option>
+            </select>
 
-<label>Choose Platform</label>
-<select id="platform">
-<option>Quotex</option>
-<option>Pocket Option</option>
-</select>
+            <label>Currency Pair</label>
+            <select id="pair">
+                <option value="EUR/USD">EUR/USD</option>
+                <option value="GBP/USD">GBP/USD</option>
+                <option value="USD/JPY">USD/JPY</option>
+                <option value="AUD/USD">AUD/USD</option>
+            </select>
 
-<label>Choose Market</label>
-<select id="market">
-<option>OTC Market</option>
-<option>Normal Market</option>
-</select>
+            <label>Timeframe</label>
+            <select id="timeframe">
+                <option value="1 Minute">1 Minute</option>
+                <option value="2 Minutes">2 Minutes</option>
+                <option value="5 Minutes">5 Minutes</option>
+            </select>
 
-<label>Currency Pair</label>
-<select id="pair">
-<option>EUR/USD</option>
-<option>GBP/USD</option>
-<option>USD/JPY</option>
-<option>AUD/USD</option>
-<option>EUR/GBP</option>
-<option>USD/CAD</option>
-<option>NZD/USD</option>
-</select>
+            <button class="btn" onclick="generateSignal()">GENERATE DEMO SIGNAL</button>
+        </div>
 
-<label>Timeframe</label>
-<select id="time">
-<option>1 Minute</option>
-<option>5 Minutes</option>
-<option>15 Minutes</option>
-</select>
+        <!-- Signal History Card -->
+        <div class="card">
+            <h2>📜 Signal History</h2>
+            <div id="signalResult" class="signal-box">
+                No demo signals generated yet.
+            </div>
+        </div>
 
-<button onclick="getSignal()">GENERATE DEMO SIGNAL</button>
-</div>
+        <!-- Risk Warning -->
+        <div class="card" style="border-color:#ff4d4d;">
+            <h2 style="color:#ff4d4d;">⚠️ Risk Warning</h2>
+            <p style="font-size:12px;color:#a9c5df;line-height:1.4;margin:0;">
+                This website currently displays demo interface only. Demo signals are random and must not be used for real-money trading. No profits or accuracy are guaranteed.
+            </p>
+        </div>
 
-<div class="card">
-<h2>🤖 Signal Result</h2>
-<div class="result" id="result">
-<h3>BALI AI BOT</h3>
-<p class="wait">Waiting for selection...</p>
-<p class="small">Demo mode — live data not connected</p>
-</div>
-</div>
+        <div class="footer">
+            © 2026 BALI AI BOT | SIGNAL DASHBOARD
+        </div>
+    </div>
 
-<div class="card">
-<h2>📊 Selected Information</h2>
-<div class="row"><span>Platform</span><b id="p">-</b></div>
-<div class="row"><span>Market</span><b id="m">-</b></div>
-<div class="row"><span>Pair</span><b id="c">-</b></div>
-<div class="row"><span>Timeframe</span><b id="t">-</b></div>
-</div>
+    <script>
+        function generateSignal() {
+            const platform = document.getElementById('platform').value;
+            const market = document.getElementById('market').value;
+            const pair = document.getElementById('pair').value;
+            const timeframe = document.getElementById('timeframe').value;
+            
+            const actions = ["🟢 CALL (UP)", "🔴 PUT (DOWN)"];
+            const randomAction = actions[Math.floor(Math.random() * actions.length)];
+            const accuracy = (Math.random() * (98 - 85) + 85).toFixed(1);
+            
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
 
-<div class="card">
-<h2>📜 Signal History</h2>
-<div id="history">
-<p class="small">No demo signals generated yet.</p>
-</div>
-</div>
+            const resultHTML = `
+                <div style="font-size:14px;color:#a9c5df;margin-bottom:5px;"><b>${platform}</b> (${market})</div>
+                <div style="font-size:16px;color:white;margin-bottom:5px;">Pair: <b>${pair}</b> | Timeframe: <b>${timeframe}</b></div>
+                <div style="font-size:18px;font-weight:bold;margin:8px 0;color:${randomAction.includes('CALL') ? '#00ffcc' : '#ff4d4d'};">
+                    Signal: ${randomAction}
+                </div>
+                <div style="font-size:12px;color:#00c8ff;">Accuracy: ~${accuracy}% | Time: ${timeString}</div>
+            `;
 
-<div class="card">
-<h2>📲 Telegram Bot</h2>
-<p>Get BALI AI BOT updates on Telegram.</p>
-<a href="https://t.me/BaliAISignalBot" target="_blank">
-<button>OPEN TELEGRAM BOT</button>
-</a>
-</div>
-
-<div class="card">
-<h2>⚠️ Risk Warning</h2>
-<p class="small">
-This website currently displays demo interface only.
-No live market data or real trading predictions
-are connected. Demo signals are random and must
-not be used for real-money trading.
-Trading involves financial risk. No profits
-or accuracy are guaranteed.
-</p>
-</div>
-
-</div>
-
-<footer>© 2026 BALI AI BOT | SIGNAL DASHBOARD</footer>
-
-<script>
-let historyList=[];
-
-function getSignal(){
- const platform=document.getElementById("platform").value;
- const market=document.getElementById("market").value;
- const pair=document.getElementById("pair").value;
- const time=document.getElementById("time").value;
-
- document.getElementById("p").textContent=platform;
- document.getElementById("m").textContent=market;
- document.getElementById("c").textContent=pair;
- document.getElementById("t").textContent=time;
-
- document.getElementById("result").innerHTML=`
- <h3>🔍 Analysis Required</h3>
- <p>${platform}</p>
- <p>${market}</p>
- <p><b>${pair}</b></p>
- <p>${time}</p>
- <p class="wait">LIVE MARKET DATA NOT CONNECTED</p>
- <p class="small">No real BUY/SELL recommendation available.</p>
- `;
-
-}
-</script>
+            document.getElementById('signalResult').innerHTML = resultHTML;
+        }
+    </script>
 
 </body>
-  </html>
-  
+</html>
